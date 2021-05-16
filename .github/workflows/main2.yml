@@ -9,7 +9,7 @@ on:
     inputs:
       actions:
         description: "deploy/stop/start"
-        default: "deploy"
+        default: "start"
 
 jobs:
   heroku-deploy:
