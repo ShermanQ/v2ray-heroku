@@ -13,7 +13,7 @@ on:
 
 jobs:
   heroku-deploy:
-    if: ${{ github.event.inputs.actions == 'deploy' || github.event.inputs.actions == ''}}
+    if: ${{ github.event.inputs.actions == 'deploy'}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -43,6 +43,7 @@ jobs:
           justlogin: true
       - run: |
           echo action is ${{ github.event.inputs.actions }}
+          if [[ ${{ github.event.inputs.actions }} == '' ]]; then heroku ps:scale web=1 -a ${{secrets.APP_NAME2}} && echo "start"; fi 
           if [[ ${{ github.event.inputs.actions }} == 'stop' ]]; then heroku ps:scale web=0 -a ${{secrets.APP_NAME2}} && echo "stop"; fi
           if [[ ${{ github.event.inputs.actions }} == 'start' ]]; then heroku ps:scale web=1 -a ${{secrets.APP_NAME2}} && echo "start"; fi
           heroku ps:scale web=0 -a ${{secrets.APP_NAME2}};
