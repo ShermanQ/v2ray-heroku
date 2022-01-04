@@ -2,6 +2,11 @@
 
 cat << EOF > /etc/v2ray/config.json
 {
+"log": {
+    "loglevel": "info",
+    "access": "/var/log/v2ray/access.log", // 这是 Linux 的路径
+    "error": "/var/log/v2ray/error.log"
+  },
     "policy": {
         "levels": {
             "0": {
