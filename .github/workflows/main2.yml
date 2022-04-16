@@ -46,3 +46,9 @@ jobs:
           if [[ ${{ github.event.inputs.actions }} == 'stop' ]]; then heroku ps:scale web=0 -a ${{secrets.APP_NAME2}} && echo "stop"; fi
           if [[ ${{ github.event.inputs.actions }} == 'start'  ||  ${{ github.event.inputs.actions }} == '' ]]; then heroku ps:scale web=1 -a ${{secrets.APP_NAME2}} && echo "start"; fi
           heroku ps -a ${{secrets.APP_NAME2}}
+          git config --local user.email "sherman@gmail.com"
+          git config --local user.name "ShermanQ"
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git pull --rebase
+          git commit --allow-empty -m "Vagain"
+          git push
